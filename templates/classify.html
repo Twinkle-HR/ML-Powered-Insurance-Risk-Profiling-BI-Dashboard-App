@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Insurance Risk Profile Predictor</title>
+  <link rel="stylesheet" href="./static/css/classification.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <img src="./static/images/insurance_logo.png" alt="Logo" class="logo" />
+    <h1>Insurance Risk Profile Predictor</h1>
+    <a href="/" class="home-icon" title="Go to Home">
+      <i class="fas fa-home"></i>
+    </a>
+  </header>
+
+  <main class="main-content">
+{% if prediction %}
+  <div class="prediction-result">
+    <h3>Predicted Risk Profile: <span class="risk-label risk-{{ prediction|lower }}">{{ prediction }}</span>
+    <p>Confidence Score: {{ confidence }}%</p>
+  </div>
+{% endif %}
+<section class="form-section">
+  <h2>Enter Customer Information</h2>
+  <form action="/predict" method="POST" class="customer-form">
+
+    <!-- BASIC DETAILS -->
+    <fieldset>
+      <legend>Basic Details</legend>
+
+      <label for="dob">Date of Birth:</label>
+      <input type="date" name="dob" id="dob" required>
+
+      <label for="gender">Gender:</label>
+      <select name="gender" id="gender" required>
+        <option value="">Select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+      <label for="marital_status">Marital Status:</label>
+      <select name="marital_status" id="marital_status" required>
+        <option value="">Select</option>
+        <option value="Single">Single</option>
+        <option value="Married">Married</option>
+        <option value="Divorced">Divorced</option>
+        <option value="Widowed">Widowed</option>
+      </select>
+
+      <label for="education_level">Education Level:</label>
+      <select name="education_level" id="education_level" required>
+        <option value="">Select</option>
+        <option value="High School">High School</option>
+        <option value="Diploma / Polytechnic">Diploma / Polytechnic</option>
+        <option value="Bachelor’s Degree">Bachelor’s Degree</option>
+        <option value="Master’s Degree">Master’s Degree</option>
+        <option value="Doctorate">Doctorate</option>
+      </select>
+
+      <label for="occupation">Occupation:</label>
+      <select name="occupation" id="occupation" required>
+        <option value="">Select</option>
+        <option value="Student">Student</option>
+        <option value="Engineer">Engineer</option>
+        <option value="Doctor">Doctor</option>
+        <option value="Teacher">Teacher</option>
+        <option value="Business Owner">Business Owner</option>
+        <option value="Retired">Retired</option>
+        <option value="Unemployed">Unemployed</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="annual_income">Annual Income (₹):</label>
+      <input type="number" name="annual_income" id="annual_income" min="50000" required>
+
+    </fieldset>
+
+    <!-- LOCATION -->
+    <fieldset>
+      <legend>State</legend>
+      <label for="state">State:</label>
+      <select name="state" id="state" required>
+        <option value="">Select State</option>
+        <!-- State options -->
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Goa">Goa</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Mizoram">Mizoram</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="West Bengal">West Bengal</option>
+        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+        <option value="Chandigarh">Chandigarh</option>
+        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+        <option value="Ladakh">Ladakh</option>
+        <option value="Lakshadweep">Lakshadweep</option>
+        <option value="Puducherry">Puducherry</option>
+      </select>
+    </fieldset>
+
+    <!-- POLICY DETAILS -->
+    <fieldset>
+      <legend>Policy Details</legend>
+
+      <label for="policy_type">Policy Type:</label>
+      <select name="policy_type" id="policy_type" required>
+        <option value="">Select</option>
+        <option value="Individual">Individual</option>
+        <option value="Family">Family</option>
+        <option value="Group">Group</option>
+        <option value="Business">Business</option>
+      </select>
+
+      <label for="policy_purchase_year">Policy Purchase Year:</label>
+      <select name="policy_purchase_year" id="policy_purchase_year" required>
+        <option value="">Select</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+      </select>
+
+     <div class="checkbox-group">
+      <span>Insurance Products:</span> &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+        <label><input type="checkbox" name="insurance_products[]" value="Vehicle"> Vehicle</label>
+        <label><input type="checkbox" name="insurance_products[]" value="Home"> Home</label>
+        <label><input type="checkbox" name="insurance_products[]" value="Travel"> Travel</label>
+        <label><input type="checkbox" name="insurance_products[]" value="Life/General"> Life/General</label>
+        <label><input type="checkbox" name="insurance_products[]" value="Health"> Health</label>
+      </div>
+      <label for="coverage_amount">Coverage Amount (₹):</label>
+      <div class="range-group">
+        <input 
+          type="range" 
+          name="coverage_amount" 
+          id="coverage_amount" 
+          min="50000" 
+          max="10000000" 
+          step="10000" 
+          value="50000" 
+          oninput="coverageOutput.value = coverage_amount.value" 
+        />
+        <output name="coverageOutput" id="coverageOutput">₹ 50000</output>
+      </div>
+
+      <label for="premium_amount">Premium Amount (₹):</label>
+      <input type="number" name="premium_amount" id="premium_amount" required>
+
+      <label for="deductible">Deductible (₹):</label>
+      <input type="number" name="deductible" id="deductible" required>
+    </fieldset>
+
+    <!-- CUSTOMER TYPE -->
+    <fieldset>
+      <legend>Customer Type</legend>
+
+      <label for="customer_type">Customer Type:</label>
+      <select name="customer_type" id="customer_type" required>
+        <option value="">Select</option>
+        <option value="new">New Customer</option>
+        <option value="existing">Existing Customer</option>
+      </select>
+
+      <label for="previous_claims_history">Previous Claims:</label>
+      <input type="number" name="previous_claims_history" id="previous_claims_history" required>
+
+      <label for="claim_history">Recent Claims:</label>
+      <input type="number" name="claim_history" id="claim_history" required>
+
+    </fieldset>
+
+    <!-- RISK FACTORS -->
+    <fieldset>
+      <legend>Risk Factors</legend>
+
+      <label for="credit_score">Credit Score (300–900):</label>
+      <input type="number" name="credit_score" id="credit_score" required>
+
+      <label for="driving_record">Driving Record Score (0–10):</label>
+      <input type="number" name="driving_record" id="driving_record" required>
+
+      <label for="life_events">Recent Life Event:</label>
+      <select name="life_events" id="life_events" required>
+        <option value="">Select</option>
+        <option value="No event">No Event</option>
+        <option value="Marriage">Marriage</option>
+        <option value="Divorce">Divorce</option>
+        <option value="New Job">New Job</option>
+        <option value="Relocation">Relocation</option>
+        <option value="Medical Emergency">Medical Emergency</option>
+      </select>
+    </fieldset>
+
+    <!-- PREFERENCES -->
+    <fieldset>
+      <legend>Preferences</legend>
+
+      <label for="customer_preferences">Preferred Communication Method:</label>
+      <select name="customer_preferences" id="customer_preferences" required>
+        <option value="">Select</option>
+        <option value="Email">Email</option>
+        <option value="In-Person Meeting">In-Person Meeting</option>
+        <option value="Mail">Mail</option>
+        <option value="Phone">Phone</option>
+        <option value="Text">Text</option>
+      </select>
+    </fieldset>
+
+    <!-- SUBMIT -->
+    <button type="submit" class="check-btn">Predict Risk Profile</button>
+  </form>
+</section>
+</main>
+  <footer class="site-footer">
+    &copy; 2025 Data Insight Platform. All rights reserved.
+  </footer>
+
+<script>
+  function adjustFields(type) {
+    if (type === 'new') {
+      document.getElementById('previous_claims_history').value = 0;
+      document.getElementById('claim_history').value = 0;
+      document.getElementById('life_events').value = "No event";
+    } else {
+      document.getElementById('previous_claims_history').value = '';
+      document.getElementById('claim_history').value = '';
+      document.getElementById('life_events').value = '';
+    }
+  }
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const customerType = document.getElementById("customer_type");
+    const prevClaims = document.getElementById("previous_claims_history");
+    const recentClaims = document.getElementById("claim_history");
+
+    function handleCustomerTypeChange() {
+      const isNew = customerType.value === "new";
+
+      prevClaims.value = isNew ? 0 : "";
+      prevClaims.readOnly = isNew;
+
+      recentClaims.value = isNew ? 0 : "";
+      recentClaims.readOnly = isNew;
+    }
+
+    // Trigger once on load
+    handleCustomerTypeChange();
+
+    // Attach listener
+    customerType.addEventListener("change", handleCustomerTypeChange);
+  });
+</script>
+<script>
+  document.querySelector("form").addEventListener("submit", function (e) {
+    const income = document.getElementById("annual_income").value;
+    if (income <= 0) {
+      e.preventDefault();
+      alert("Please enter a valid positive income.");
+    }
+  });
+</script>
+</body>
+</html>

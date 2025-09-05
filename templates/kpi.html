@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>KPI Reporting</title>
+   <link rel="stylesheet" href="/static/css/kpi.css">
+<link rel="stylesheet" href="/static/css/styles.css">
+   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+  <header class="site-header">
+    <img src="./static/images/insurance_logo.png" alt="Logo" class="logo" />
+    <h1>KPI Reporting Dashboard</h1>
+
+    <a href="/" class="home-icon" title="Go to Home">
+      <i class="fas fa-home"></i>
+    </a>
+  </header>
+
+ <main class="dashboard-layout">
+  <!-- Left: KPI Cards -->
+  <aside class="dashboard-left">
+    <div class="kpi-card">
+      <div class="kpi-icon"><i class="fas fa-users"></i></div>
+      <h3>Total Customers</h3>
+      <p>{{ total_customers }}</p>
+    </div>
+        <div class="kpi-card">
+      <div class="kpi-icon"><i class="fas fa-clipboard-list"></i></div>
+      <h3>Total Claims</h3>
+      <p>{{ total_claims }}</p>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon"><i class="fas fa-balance-scale"></i></div>
+      <h3>Avg Claims/Customer</h3>
+      <p>{{ avg_claims }}</p>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <h3>High-Risk %</h3>
+      <p>{{ high_risk_percent }}%</p>
+    </div>
+  </aside>
+
+  <section class="dashboard-right">
+    <div>
+
+   <iframe src="/kpi/dashboard/" style="width:100%; height:800px; border:none;"></iframe> </div>
+
+    <div class="chart-grid">
+      {% for plot in all_plots %}
+        <div id="chart{{ loop.index0 }}" class="chart-box"></div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+
+<script>
+  const allPlots = {{ all_plots | tojson | safe }};
+  allPlots.forEach((plot, i) => {
+    Plotly.newPlot(`chart${i}`, plot.data, plot.layout, {
+      responsive: true, displayModeBar: false
+    });
+  });
+</script>
+
+<footer class="site-footer">
+    &copy; 2025 Data Insight Platform. All rights reserved.
+  </footer>
+</body>
+</html>

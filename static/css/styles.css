@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+ font-family: "Source Sans 3", sans-serif;
+  line-height: 1.6;
+  background-color: #f7f9fb;
+  color: #333;
+  overflow: hidden;
+}
+.site-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color:#ffffff;
+  color:  #4b2bed;
+  box-shadow:  0 0 12px rgba(0, 0, 0, 0.08);
+    font-size: 12px;
+}
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 1rem;
+}
+.site-title {
+  font-size: 1.5rem;
+}
+.main-content {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+.page-intro {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.page-intro h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #003366;
+}
+.page-intro p {
+  font-size: 1rem;
+  color: #555;
+  max-width: 600px;
+  margin: auto;
+}
+.home-icon {
+  margin-left: auto;
+  font-size: 1.4rem;
+  color:  #4b2bed;
+  text-decoration: none;
+  padding: 0.4rem;
+  transition: color 0.2s ease;
+}
+.home-icon:hover {
+  color:  #4b2bed;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 0;
+   text-decoration: none;
+}
+.card {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  flex: 1 1 300px;
+  max-width: 300px;
+  min-height: 260px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.card-icon {
+  font-size: 2.5rem;
+  color:  #4b2bed;
+  margin-bottom: 1rem;
+}
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #003366;
+   text-decoration: none;
+}
+.card-subtitle {
+  font-size: 0.95rem;
+  color: #666;
+   text-decoration: none;
+}
+.site-footer {
+  text-align: center;
+  padding: 1rem;
+  background-color:  #4b2bed;
+  color: #fff;
+  margin-top: 0.3rem;
+}
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+

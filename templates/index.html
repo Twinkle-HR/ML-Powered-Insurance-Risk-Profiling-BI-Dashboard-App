@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced Data Classification</title>
+  <link rel="stylesheet" href="./static/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body>
+
+<header class="site-header">
+  <img src="./static/images/insurance_logo.png" alt="Logo" class="logo" />
+  <h1 class="site-title">Insurance Analytics Platform</h1>
+</header>
+  <main class="main-content">
+    <section class="page-intro">
+      <h2>Advanced Data Classification<br>& Performance Analytics</h2>
+      <p>
+        Leverage AI-powered classification and comprehensive KPI reporting to gain deep insights into your data patterns and system performance.
+      </p>
+    </section>
+
+    <section class="card-container">
+       <a href="{{ url_for('classification') }}" class="card-link">
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-brain"></i></div>
+        <h3 class="card-title">AI Classification</h3>
+        <p class="card-subtitle">Use machine learning to automatically categorize and tag complex datasets.</p>
+      </div>
+    </a>
+<a href="{{ url_for('kpi_reporting') }}" class="card-link">
+
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+        <h3 class="card-title">Performance Analytics</h3>
+        <p class="card-subtitle">Track KPIs and system metrics with real-time dashboards and reports.</p>
+      </div>
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2025 Data Insight Platform. All rights reserved.
+  </footer>
+
+</body>
+</html>
